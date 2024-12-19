@@ -12,60 +12,32 @@ namespace tst
     {
         static void Main(string[] args)
         {
-            Rotate(new int[] { -1, -100, 3, 99 },2);
+            //Console.WriteLine(shortNumber("66-Н3-17 - перевод договора с корректировками контрагента"));
+            IsPalindrome("A man, a plan, a canal: Panama");
+        }
+
+        //static public string shortNumber(string str)
+        //{
+        //    string[] str.Split('-');
+
+        //    return ;
+
+        //}
+
+        static public bool IsPalindrome(string s)
+        {
+            s = s.ToLower().Replace("[^a-zA-Z0-9]", "");
+            return true;
         }
 
         static public void Rotate(int[] nums, int k)
         {
-            int temp1 = nums[0];
-            int temp2 = 0;
-            int index = 0;
-            for (int j = 0; j < nums.Length; j++)
-            {
-                if (index == 0 && j != 0)
-                {
-                    index++;
-                    temp1 = nums[index];
-                    temp1 = 0;
-                }
-                if (index + k < nums.Length)
-                {
-                    if (temp1 != 0)
-                    {
-                        temp2 = nums[index + k];
-                        nums[index + k] = temp1;
-                        temp1 = 0;
-                        index = index + k;
-                        continue;
-                    }
-                    if (temp2 != 0)
-                    {
-                        temp1 = nums[index + k];
-                        nums[index + k] = temp2;
-                        temp2 = 0;
-                        index = index + k;
-                        continue;
-                    }
-                }
-                else
-                {
-                    index = ((index + k) - nums.Length);
-                    if (temp1 != 0)
-                    {
-                        temp2 = nums[index];
-                        nums[index] = temp1;
-                        temp1 = 0;                        
-                        continue;
-                    }
-                    if (temp2 != 0)
-                    {
-                        temp1 = nums[index];
-                        nums[index] = temp2;
-                        temp2 = 0;                        
-                        continue;
-                    }
-                }
-            }
+            int[] tempArr = new int[nums.Length];
+            k = k % nums.Length;
+            for (int i = 0; i < nums.Length; i++)
+                tempArr[(i + k)% nums.Length] = nums[i];
+            tempArr.CopyTo(nums, 0);
+
         }
 
         static public string RepeatLimitedString(string s, int repeatLimit)
