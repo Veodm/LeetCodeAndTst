@@ -15,10 +15,34 @@ namespace tst
         {
             //Console.WriteLine(shortNumber("66-Н3-17"));
 
-            IsSubsequence("abc", "ahcbxgdc");
+            Console.WriteLine(RemoveDuplicates(new int[] { 0, 0, 1, 1, 1, 1, 1, 2, 3, 3 }));
             Console.Read();
         }
+        static public int RemoveDuplicates(int[] nums)
+        {
+            Dictionary <int,int> dic = new Dictionary<int, int> ();
+            int res = 0;
+            foreach (int num in nums)
+            {
+                if(!dic.ContainsKey(num))
+                    dic.Add(num, 1);
+                else if (dic[num] < 2)
+                    dic[num] = 2;
+            }
+            Array.Clear(nums, 0, nums.Length);
+            int i = 0;
+            foreach(int key in dic.Keys)
+            {
+                res += dic[key];
+                for(int j = 0; j < dic[key];j++)
+                {
+                    nums[i] = key;
+                    i++;
+                }
+            }
+            return res;
 
+        }
         static public string shortNumber(string str)
         {
             if (str.Length > 49)
