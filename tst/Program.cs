@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -12,21 +13,40 @@ namespace tst
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine(shortNumber("66-Н3-17 - перевод договора с корректировками контрагента"));
-            IsPalindrome("A man, a plan, a canal: Panama");
+            //Console.WriteLine(shortNumber("66-Н3-17"));
+
+            IsSubsequence("abc", "ahcbxgdc");
+            Console.Read();
         }
 
-        //static public string shortNumber(string str)
-        //{
-        //    string[] str.Split('-');
+        static public string shortNumber(string str)
+        {
+            if (str.Length > 49)
+            {
+                string[] s = str.Trim().Split('-');
+                return s[0] + '-' + s[1] + '-' + s[2];
+            }
+            else return str;
 
-        //    return ;
+        }
 
-        //}
+        static public bool IsSubsequence(string s, string t)
+        {
+            t = Regex.Replace(t, "[^" + s + "]+", "");
+            if (s != t)
+                return false;
+            return true;
+        }
 
         static public bool IsPalindrome(string s)
         {
-            s = s.ToLower().Replace("[^a-zA-Z0-9]", "");
+            s = Regex.Replace(s, "[^a-zA-Z0-9]+", "").ToLower();
+            int len = s.Length;
+            if (len == 0)
+                return true;
+            for (int i = 0; i < len; i++)
+                if (s[i] != s[len - 1 - i])
+                    return false;
             return true;
         }
 
@@ -35,7 +55,7 @@ namespace tst
             int[] tempArr = new int[nums.Length];
             k = k % nums.Length;
             for (int i = 0; i < nums.Length; i++)
-                tempArr[(i + k)% nums.Length] = nums[i];
+                tempArr[(i + k) % nums.Length] = nums[i];
             tempArr.CopyTo(nums, 0);
 
         }
