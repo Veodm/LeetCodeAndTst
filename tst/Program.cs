@@ -15,9 +15,25 @@ namespace tst
         {
             //Console.WriteLine(shortNumber("66-Н3-17"));
 
-            Console.WriteLine(RemoveDuplicates(new int[] { 0, 0, 1, 1, 1, 1, 1, 2, 3, 3 }));
+            Console.WriteLine(MaxProfit(new int[] { 7, 1, 5, 3, 6, 4 }));
+            Console.WriteLine(MaxProfit(new int[] { 7, 6, 4, 3, 1 })); 
             Console.Read();
         }
+        //https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/?envType=study-plan-v2&envId=top-interview-150
+        static public int MaxProfit(int[] prices)
+        {
+            int res = 0;
+            int min = prices[0];
+            for (int i = 1; i < prices.Length; i++)
+            {
+                if (prices[i] < min)
+                    min = prices[i];
+                if (prices[i] - min > res)
+                    res = prices[i] - min;
+            }
+            return res;
+        }
+
         static public int RemoveDuplicates(int[] nums)
         {
             Dictionary <int,int> dic = new Dictionary<int, int> ();
