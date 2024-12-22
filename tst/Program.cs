@@ -13,12 +13,31 @@ namespace tst
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine(shortNumber("66-Н3-17"));
-
-            Console.WriteLine(MaxProfit(new int[] { 7, 1, 5, 3, 6, 4 }));
-            Console.WriteLine(MaxProfit(new int[] { 7, 6, 4, 3, 1 })); 
+            Console.WriteLine(IsSubsequence("b", "adfgdfxbxxdasdc")); 
             Console.Read();
         }
+
+        //https://leetcode.com/problems/is-subsequence/?envType=study-plan-v2&envId=top-interview-150
+        static public bool IsSubsequence(string s, string t)
+        {            
+            int index = 0;
+            foreach (char chr in t)
+            {
+                if (index == s.Length)
+                    return true;
+                if (chr == s[index])
+                    index++;
+            }
+            return index == s.Length;
+        }
+
+        //https://leetcode.com/problems/length-of-last-word/submissions/1485561199/?envType=study-plan-v2&envId=top-interview-150
+        static public int LengthOfLastWord(string s)
+        {
+            string[] buf = s.Trim().Split(' ');
+            return buf[buf.Count()-1].Length;
+        }
+
         //https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/?envType=study-plan-v2&envId=top-interview-150
         static public int MaxProfit(int[] prices)
         {
@@ -68,15 +87,7 @@ namespace tst
             }
             else return str;
 
-        }
-
-        static public bool IsSubsequence(string s, string t)
-        {
-            t = Regex.Replace(t, "[^" + s + "]+", "");
-            if (s != t)
-                return false;
-            return true;
-        }
+        }        
 
         static public bool IsPalindrome(string s)
         {
