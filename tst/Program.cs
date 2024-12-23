@@ -13,8 +13,33 @@ namespace tst
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(IsSubsequence("b", "adfgdfxbxxdasdc")); 
+            Console.WriteLine(CanConstruct("fihjjjjei", "hjibagacbhadfaefdjaeaebgi")); 
             Console.Read();
+        }
+
+        //https://leetcode.com/problems/ransom-note/?envType=study-plan-v2&envId=top-interview-150
+        static public bool CanConstruct(string ransomNote, string magazine)
+        {
+            Dictionary<char, int> rn = new Dictionary<char, int>();
+            Dictionary<char, int> mag = new Dictionary<char, int>();
+            foreach (char c in ransomNote)
+                if (!rn.ContainsKey(c))
+                    rn.Add(c, 1);
+                else
+                    rn[c]++;
+            foreach (char c in magazine)
+                if (!mag.ContainsKey(c))
+                    mag.Add(c, 1);
+                else
+                    mag[c]++;
+            foreach (char c in rn.Keys)
+            {
+                if (!mag.ContainsKey(c))
+                    return false;
+                if (rn[c] > mag[c])
+                    return false;
+            }
+            return true;
         }
 
         //https://leetcode.com/problems/is-subsequence/?envType=study-plan-v2&envId=top-interview-150
