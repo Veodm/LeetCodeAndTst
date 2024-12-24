@@ -13,8 +13,34 @@ namespace tst
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(CanConstruct("fihjjjjei", "hjibagacbhadfaefdjaeaebgi")); 
+            Console.WriteLine(IsAnagram("rat", "tare")); 
             Console.Read();
+        }
+
+        //https://leetcode.com/problems/valid-anagram/?envType=study-plan-v2&envId=top-interview-150
+        static public bool IsAnagram(string s, string t)
+        {
+            if(s.Length != t.Length) return false;
+            Dictionary<char, int> dicS = new Dictionary<char, int>();
+            Dictionary<char, int> dicT = new Dictionary<char, int>();
+            foreach (char c in s)
+                if (!dicS.ContainsKey(c))
+                    dicS.Add(c, 1);
+                else
+                    dicS[c]++;
+            foreach (char c in t)
+                if (!dicT.ContainsKey(c))
+                    dicT.Add(c, 1);
+                else
+                    dicT[c]++;
+            foreach (char c in dicS.Keys)
+            {
+                if (!dicT.ContainsKey(c))
+                    return false;
+                if (dicS[c] != dicT[c])
+                    return false;
+            }
+            return true;
         }
 
         //https://leetcode.com/problems/ransom-note/?envType=study-plan-v2&envId=top-interview-150
