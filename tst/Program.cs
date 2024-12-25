@@ -13,8 +13,21 @@ namespace tst
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(IsAnagram("rat", "tare")); 
+            Console.WriteLine(WordPattern("abba", "dog cat cat dog"));
             Console.Read();
+        }
+
+        static public bool WordPattern(string pattern, string s)
+        {
+            Dictionary<string,string> map = new Dictionary<string, string>();
+            //foreach (char c in pattern)
+            //    if (!map.ContainsKey(c))
+            //        map.Add(c, "");                
+            foreach (string word in s.Split(' '))
+            {
+                if (!map.ContainsKey(word))
+                    map.Add(word, "");
+            }
         }
 
         //https://leetcode.com/problems/valid-anagram/?envType=study-plan-v2&envId=top-interview-150
