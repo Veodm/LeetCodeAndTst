@@ -13,22 +13,46 @@ namespace tst
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(WordPattern("abba", "dog cat cat dog"));
+            Console.WriteLine(HIndex(new int[] { 1,2,3,4,4,5 }));
             Console.Read();
         }
 
+        //https://leetcode.com/problems/h-index/?envType=study-plan-v2&envId=top-interview-150
+        static public int HIndex(int[] citations)
+        {
+            Array.Sort(citations);
+            int buf = 0;
+            for(int i = citations.Length-1;i>-1;i--)
+            {
+                if (buf < citations[i])
+                    buf++;
+                else
+                    return buf;
+
+            }
+            return buf;
+        }
+
+        //https://leetcode.com/problems/word-pattern/?envType=study-plan-v2&envId=top-interview-150
         static public bool WordPattern(string pattern, string s)
         {
-            Dictionary<string,string> map = new Dictionary<string, string>();
-            //foreach (char c in pattern)
-            //    if (!map.ContainsKey(c))
-            //        map.Add(c, "");                
-            foreach (string word in s.Split(' '))
+            string[] str = s.Split(' ');
+            if (pattern.Length != str.Length) return false;
+            Dictionary<char, string> map = new Dictionary<char, string>();
+            for (int i = 0; i < pattern.Length; i++)
             {
-                if (!map.ContainsKey(word))
-                    map.Add(word, "");
+                if (map.ContainsKey(pattern[i]))
+                {
+                    if (map[pattern[i]] != str[i]) return false;
+                }
+                else
+                {
+                    if (map.ContainsValue(str[i])) return false;
+                    map.Add(pattern[i], str[i]);
+                }
             }
-        }
+            return true;
+        }        
 
         //https://leetcode.com/problems/valid-anagram/?envType=study-plan-v2&envId=top-interview-150
         static public bool IsAnagram(string s, string t)
