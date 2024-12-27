@@ -13,8 +13,28 @@ namespace tst
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(HIndex(new int[] { 1,2,3,4,4,5 }));
+            Console.WriteLine(IsIsomorphic("foo", "bar"));
             Console.Read();
+        }
+
+        //https://leetcode.com/problems/isomorphic-strings/?envType=study-plan-v2&envId=top-interview-150
+        static public bool IsIsomorphic(string s, string t)
+        {            
+            if (s.Length != t.Length) return false;
+            Dictionary<char, char> map = new Dictionary<char, char>();
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (map.ContainsKey(s[i]))
+                {
+                    if (map[s[i]] != t[i]) return false;
+                }
+                else
+                {
+                    if (map.ContainsValue(t[i])) return false;
+                    map.Add(s[i], t[i]);
+                }
+            }
+            return true;
         }
 
         //https://leetcode.com/problems/h-index/?envType=study-plan-v2&envId=top-interview-150
